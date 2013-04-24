@@ -95,7 +95,7 @@
                             <p:message for="categoria"/>
 
                             <h:outputLabel for="email" value="Email: *" />  
-                            <p:inputText id="email" value="#{usuarioMB.usuario.email}" maxlength="40" validatorMessage="nome@example.com" requiredMessage="Campo Obrigatório" required="true" label="Email">     
+                            <p:inputText id="email" value="#{usuarioMB.usuario.email}" maxlength="40" validatorMessage="nome@example.com" requiredMessage="Campo Obrigatório" required="true" label="Email">
                                 <f:validateRegex for="email" pattern="^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z]+[0-9,a-z,A-Z,.,-]*(.){1}[a-zA-Z]{2,4})+$"/>
                             </p:inputText>
                             <p:message for="email" /> 
