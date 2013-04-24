@@ -4,7 +4,7 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2013-04-24T04:19:30")
+@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2013-04-24T04:39:48")
 @StaticMetamodel(CategoriaDeEvento.class)
 public class CategoriaDeEvento_ { 
 
