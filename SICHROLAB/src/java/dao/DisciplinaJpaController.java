@@ -5,6 +5,7 @@
 package dao;
 
 import dao.exceptions.NonexistentEntityException;
+import dao.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -30,7 +31,7 @@ public class DisciplinaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Disciplina disciplina) {
+    public void create(Disciplina disciplina){
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -54,7 +55,7 @@ public class DisciplinaJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = disciplina.getCod_disciplina();
+                String id = disciplina.getCod_disciplina();
                 if (findDisciplina(id) == null) {
                     throw new NonexistentEntityException("The disciplina with id " + id + " no longer exists.");
                 }
@@ -67,7 +68,7 @@ public class DisciplinaJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(String id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -112,7 +113,7 @@ public class DisciplinaJpaController implements Serializable {
         }
     }
 
-    public Disciplina findDisciplina(Long id) {
+    public Disciplina findDisciplina(String id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Disciplina.class, id);

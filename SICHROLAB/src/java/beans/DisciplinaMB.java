@@ -29,30 +29,28 @@ public class DisciplinaMB {
     private Disciplina disciplina = new Disciplina();
     private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
     
+    private String nome_disciplina;
     private String disciplinaPesquisada;
     private String mensagem;
     
     public DisciplinaMB() {
-        //pesquisar();
+        pesquisar();
     }
     
     public void inserirDisciplina(){
         try{
-            disciplinas = new ArrayList<Disciplina>();
-            disciplina.setCod_disciplina(null);
             disciplinaDAO.create(disciplina);
             disciplina = new Disciplina();
             setMensagem("Cadastro realizado com sucesso");
         }catch(Exception ex){
-            setMensagem("Cadastro já existente no sistema");
-            Logger.getLogger(DisciplinaMB.class.getName()).log(Level.SEVERE, null, ex);
+           setMensagem("Cadastro já existente no sistema");
+           Logger.getLogger(DisciplinaMB.class.getName()).log(Level.SEVERE, null, ex);
         }
         pesquisar();
     }
     
-    public void alterarCategoriaDeEvento() {
+    public void alterarDisciplina() {
         try {
-            disciplinas = new ArrayList<Disciplina>();
             disciplinaDAO.edit(disciplina);
             disciplina = new Disciplina();
             setMensagem("Cadastro alterado com sucesso");
@@ -80,6 +78,16 @@ public class DisciplinaMB {
     
     public void pesquisar() {
         disciplinas = disciplinaDAO.findDisciplinaEntities();
+    }
+    
+    public void pesquisarPorNomeDaDisciplina(){
+        disciplinas = new ArrayList<Disciplina>();
+        for(Disciplina s : disciplinaDAO.findDisciplinaEntities()){
+            if(s.getNome().toUpperCase().contains(getNome_disciplina().toUpperCase())){
+                disciplinas.add(s);
+            }
+        }
+        setNome_disciplina("");
     }
 
     /**
@@ -136,6 +144,20 @@ public class DisciplinaMB {
      */
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
+    }
+
+    /**
+     * @return the nome_disciplina
+     */
+    public String getNome_disciplina() {
+        return nome_disciplina;
+    }
+
+    /**
+     * @param nome_disciplina the nome_disciplina to set
+     */
+    public void setNome_disciplina(String nome_disciplina) {
+        this.nome_disciplina = nome_disciplina;
     }
     
 }

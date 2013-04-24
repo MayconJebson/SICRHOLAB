@@ -19,19 +19,19 @@ import javax.persistence.Id;
 public class Disciplina implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long cod_disciplina;
+    private String cod_disciplina;
+    
     private int carga_horaria;
     private String curso;
     
     @Column(unique=true)
     private String nome;
     
-    public Long getCod_disciplina() {
+    public String getCod_disciplina() {
         return cod_disciplina;
     }
 
-    public void setCod_disciplina(Long cod_disciplina) {
+    public void setCod_disciplina(String cod_disciplina) {
         this.cod_disciplina = cod_disciplina;
     }
 
