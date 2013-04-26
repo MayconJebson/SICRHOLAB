@@ -4,18 +4,11 @@
  */
 package beans;
 
-import dao.CategoriaUsuarioJpaController;
 import dao.UsuarioJpaController;
-import dao.exceptions.NonexistentEntityException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import modelo.CategoriaUsuario;
 import modelo.Usuario;
 
 
@@ -39,7 +32,7 @@ public class LoginMB {
         //acessar o banco de dados e validar;
         usuario = daoUsuario.findUsuario(this.usuario);
         
-        if (usuario==null){
+        if (usuario!=null){
             setMensagem("");
             return "/usuario.xhtml";
         }

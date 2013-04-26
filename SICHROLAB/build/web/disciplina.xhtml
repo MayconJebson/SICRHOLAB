@@ -6,7 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Manutenção de Disciplinas</title>
+        <title>SICRHOLAB - Manutenção de Disciplinas</title>
     </h:head>
     <h:body>
 
@@ -77,7 +77,7 @@
                             <p:message for="carga_horaria"/>
                             <h:outputLabel value="Curso:*"/>
                             <p:inputText id="curso" maxlength="200" value="#{disciplinaMB.disciplina.curso}" required="true" requiredMessage="Campo Obrigatório" label="Curso">
-                                <f:validateRegex for="curso" pattern="[a-zA-Z]*" />
+                                <!--<f:validateRegex for="curso" pattern="[a-zA-Z]*" />-->
                             </p:inputText>
                             <p:message for="curso"/>
                         </h:panelGrid>

@@ -8,13 +8,13 @@ import dao.DisciplinaJpaController;
 import dao.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import modelo.Disciplina;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author Anderson

@@ -6,7 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Manutenção de Usuario</title>
+        <title>Manutenção de Usuário</title>
     </h:head>
     <h:body onload="document.getElementById('formulario:nome').focus()">
 
@@ -87,9 +87,9 @@
                              <p:password id="pwd1" value="#{usuarioMB.usuario.senha}"   requiredMessage="Campo Obrigatório" feedback="true" label="Senha" required="true"/>  
                              <p:message for="pwd1"/>
                              
-                              <h:outputLabel for="pwd2" value="Confirme a senha: *" />  
-                              <p:password id="pwd2" value="#{usuarioMB.confirmacao}" requiredMessage="Campo Obrigatório" label="Confirmação" required="true"/>  
-                              <p:message for="pwd2"/>
+                             <h:outputLabel for="pwd2" value="Confirme a senha: *" />  
+                             <p:password id="pwd2" value="#{usuarioMB.confirmacao}" requiredMessage="Campo Obrigatório" label="Confirmação" required="true"/>  
+                             <p:message for="pwd2"/>
                             
                             
                             <h:outputLabel for="telefone" value="Telefone: " />  
@@ -120,7 +120,7 @@
                  <!--Formulario de pesquisa--> 
                 
                 <h:form id="formPesquisa">
-                    <p:panel id="formPanelPesquisa" header="Pesquisar Usuario">
+                    <p:panel id="formPanelPesquisa" header="Pesquisar Usuário">
                         <h:panelGrid columns="3">
                             <h:outputLabel value=""/>
                             <p:inputText id="nomeDoUsuario" style="text-transform: lowercase" maxlength="30" value ="#{usuarioMB.usuarioPesquisado}" required="true" requiredMessage="Campo Obrigatório"/><p:message for="nomeDoUsuario"/>
