@@ -65,7 +65,7 @@ public class DisciplinaMB {
         pesquisar();
     }
     
-    public void excluirSala() {
+    public void excluirDisciplina() {
         try {
             disciplinaDAO.destroy(disciplina.getCod_disciplina());
             disciplina = new Disciplina();
