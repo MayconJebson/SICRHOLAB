@@ -4,11 +4,18 @@
  */
 package beans;
 
+import dao.CategoriaUsuarioJpaController;
 import dao.UsuarioJpaController;
+import dao.exceptions.NonexistentEntityException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import modelo.CategoriaUsuario;
 import modelo.Usuario;
 
 
@@ -20,12 +27,11 @@ public class LoginMB {
     
     UsuarioJpaController daoUsuario = new UsuarioJpaController(factory);
     
-    private Usuario usuario;
+    private Usuario usuario = new Usuario();;
     
     private String mensagem;
 
     public LoginMB() {
-        usuario = new Usuario();
     }
     
     public String login(){
@@ -34,7 +40,7 @@ public class LoginMB {
         
         if (usuario!=null){
             setMensagem("");
-            return "/usuario.xhtml";
+            return "/index.xhtml";
         }
         
         usuario = new Usuario();

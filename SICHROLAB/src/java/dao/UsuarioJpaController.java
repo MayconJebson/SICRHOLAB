@@ -125,8 +125,8 @@ public class UsuarioJpaController implements Serializable {
     public Usuario findUsuario(Usuario u){
         EntityManager em = getEntityManager();
         try{                                
-            TypedQuery<Usuario> query = em.createQuery("select u from Usuario u where u.login=:login and u.senha=:senha",Usuario.class);
-            query.setParameter("login", u.getMatricula()).setParameter("senha", u.getSenha());
+            TypedQuery<Usuario> query = em.createQuery("select u from Usuario u where u.matricula=:matricula and u.senha=:senha",Usuario.class);
+            query.setParameter("matricula", u.getMatricula()).setParameter("senha", u.getSenha());
             return query.getSingleResult();
             //List<Object[]> results = query.getResultList();
             
