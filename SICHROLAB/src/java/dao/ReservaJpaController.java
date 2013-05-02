@@ -5,25 +5,23 @@
 package dao;
 
 import dao.exceptions.NonexistentEntityException;
-import dao.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.Usuario;
+import modelo.Reserva;
 
 /**
  *
  * @author maycon
  */
-public class UsuarioJpaController implements Serializable {
+public class ReservaJpaController implements Serializable {
 
-    public UsuarioJpaController(EntityManagerFactory emf) {
+    public ReservaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -32,18 +30,13 @@ public class UsuarioJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Usuario usuario) throws PreexistingEntityException, Exception {
+    public void create(Reserva reserva) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(usuario);
+            em.persist(reserva);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findUsuario(usuario.getMatricula()) != null) {
-                throw new PreexistingEntityException("Usuario " + usuario + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -51,19 +44,19 @@ public class UsuarioJpaController implements Serializable {
         }
     }
 
-    public void edit(Usuario usuario) throws NonexistentEntityException, Exception {
+    public void edit(Reserva reserva) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            usuario = em.merge(usuario);
+            reserva = em.merge(reserva);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = usuario.getMatricula();
-                if (findUsuario(id) == null) {
-                    throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.");
+                Long id = reserva.getCodigoReserva();
+                if (findReserva(id) == null) {
+                    throw new NonexistentEntityException("The reserva with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -74,19 +67,19 @@ public class UsuarioJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException {
+    public void destroy(Long id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Usuario usuario;
+            Reserva reserva;
             try {
-                usuario = em.getReference(Usuario.class, id);
-                usuario.getMatricula();
+                reserva = em.getReference(Reserva.class, id);
+                reserva.getCodigoReserva();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The reserva with id " + id + " no longer exists.", enfe);
             }
-            em.remove(usuario);
+            em.remove(reserva);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -95,19 +88,19 @@ public class UsuarioJpaController implements Serializable {
         }
     }
 
-    public List<Usuario> findUsuarioEntities() {
-        return findUsuarioEntities(true, -1, -1);
+    public List<Reserva> findReservaEntities() {
+        return findReservaEntities(true, -1, -1);
     }
 
-    public List<Usuario> findUsuarioEntities(int maxResults, int firstResult) {
-        return findUsuarioEntities(false, maxResults, firstResult);
+    public List<Reserva> findReservaEntities(int maxResults, int firstResult) {
+        return findReservaEntities(false, maxResults, firstResult);
     }
 
-    private List<Usuario> findUsuarioEntities(boolean all, int maxResults, int firstResult) {
+    private List<Reserva> findReservaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Usuario.class));
+            cq.select(cq.from(Reserva.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -119,34 +112,20 @@ public class UsuarioJpaController implements Serializable {
         }
     }
 
-    public Usuario findUsuario(String id) {
+    public Reserva findReserva(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Usuario.class, id);
+            return em.find(Reserva.class, id);
         } finally {
             em.close();
         }
     }
-    
-    public Usuario findUsuario(Usuario u){
-        EntityManager em = getEntityManager();
-        try{                                
-            TypedQuery<Usuario> query = em.createQuery("select u from Usuario u where u.matricula=:matricula and u.senha=:senha",Usuario.class);
-            query.setParameter("matricula", u.getMatricula()).setParameter("senha", u.getSenha());
-            return query.getSingleResult();
-            //List<Object[]> results = query.getResultList();
-            
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
 
-    public int getUsuarioCount() {
+    public int getReservaCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Usuario> rt = cq.from(Usuario.class);
+            Root<Reserva> rt = cq.from(Reserva.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

@@ -18,7 +18,7 @@ import modelo.Disciplina;
 
 /**
  *
- * @author Anderson
+ * @author maycon
  */
 public class DisciplinaJpaController implements Serializable {
 
@@ -31,13 +31,18 @@ public class DisciplinaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Disciplina disciplina){
+    public void create(Disciplina disciplina) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(disciplina);
             em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (findDisciplina(disciplina.getCod_disciplina()) != null) {
+                throw new PreexistingEntityException("Disciplina " + disciplina + " already exists.", ex);
+            }
+            throw ex;
         } finally {
             if (em != null) {
                 em.close();

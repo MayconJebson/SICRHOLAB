@@ -8,6 +8,7 @@
     <class>modelo.CategoriaUsuario</class>
     <class>modelo.Disciplina</class>
     <class>modelo.Turma</class>
+    <class>modelo.Reserva</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull"/>

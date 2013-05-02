@@ -27,6 +27,7 @@ public class Turma implements Serializable {
     
     @OneToOne
     private Usuario usuario;
+    
     @OneToOne
     private Disciplina disciplina;
     
