@@ -53,6 +53,7 @@ public class TurmaMB {
             turma.setDisciplina(disciplina);
             turmaDAO.create(turma);
             turma = new Turma();
+            usuario = new Usuario();
             setMensagem("Cadastro realizado com sucesso");
         }catch(Exception ex){
            setMensagem("Cadastro já existente no sistema");
@@ -67,6 +68,7 @@ public class TurmaMB {
             turma.setDisciplina(disciplina);
             turmaDAO.edit(turma);
             turma = new Turma();
+            usuario = new Usuario();
             setMensagem("Cadastro alterado com sucesso");
         } catch (NonexistentEntityException ex) {
             setMensagem("Cadastro não pode ser alterado");

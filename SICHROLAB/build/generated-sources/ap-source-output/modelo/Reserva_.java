@@ -9,7 +9,7 @@ import modelo.Sala;
 import modelo.Turma;
 import modelo.Usuario;
 
-@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2013-05-02T04:14:50")
+@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2013-05-03T02:01:47")
 @StaticMetamodel(Reserva.class)
 public class Reserva_ { 
 

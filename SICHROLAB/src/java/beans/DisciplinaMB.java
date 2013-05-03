@@ -40,6 +40,7 @@ public class DisciplinaMB {
     
     public void inserirDisciplina(){
         try{
+            disciplina.setCod_disciplina(disciplina.getCod_disciplina().toUpperCase());
             disciplinaDAO.create(disciplina);
             disciplina = new Disciplina();
             setMensagem("Cadastro realizado com sucesso");
@@ -52,6 +53,7 @@ public class DisciplinaMB {
     
     public void alterarDisciplina() {
         try {
+            disciplina.setCod_disciplina(disciplina.getCod_disciplina().toUpperCase());
             disciplinaDAO.edit(disciplina);
             disciplina = new Disciplina();
             setMensagem("Cadastro alterado com sucesso");

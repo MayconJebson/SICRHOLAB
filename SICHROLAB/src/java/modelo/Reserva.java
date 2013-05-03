@@ -24,13 +24,13 @@ public class Reserva implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long codigoReserva;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dataHora;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dataHoraInicioEvento;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dataHoraFimEvento;
     
     private String periodicidade;

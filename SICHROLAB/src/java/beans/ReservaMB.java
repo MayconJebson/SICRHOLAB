@@ -10,6 +10,7 @@ import dao.SalaJpaController;
 import dao.TurmaJpaController;
 import dao.UsuarioJpaController;
 import dao.exceptions.NonexistentEntityException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,20 +48,18 @@ public class ReservaMB {
     private CategoriaDeEvento categoriaDeEvento = new CategoriaDeEvento();
     private String mensagem;
     private List<Reserva> reservas = new ArrayList<Reserva>();
-    private List<String> listaDeStatus = new ArrayList<String>();
     
     /**
      * Creates a new instance of ReservaMB
      */
     public ReservaMB() {
-        addListaDeStatus();
         pesquisar();
     }
 
     public void inserirReserva(){
         try{
             reserva.setCodigoReserva(null);
-            reserva.setDataHora(dataAtual());
+            reserva.setDataHora(new Date());
             reserva.setTurma(turma);
             reserva.setCategoriaEvento(categoriaDeEvento);
             reserva.setUsuario(usuario);
@@ -81,7 +80,7 @@ public class ReservaMB {
     
     public void alterarReserva() {
         try {
-            reserva.setDataHora(dataAtual());
+            reserva.setDataHora(new Date());
             reserva.setTurma(turma);
             reserva.setCategoriaEvento(categoriaDeEvento);
             reserva.setUsuario(usuario);
@@ -119,10 +118,42 @@ public class ReservaMB {
         pesquisar();
     }
     
-    public Date dataAtual(){
-        Date data = new Date();
+    public String retornaDataHoraAtual(Reserva re){
+        String dataHora = "";
+        for(Reserva r : reservas){
+            if(r.getCodigoReserva() == re.getCodigoReserva()){
+                dataHora = formatarData(r.getDataHora());
+                reserva.setDataHora(r.getDataHora());
+            }
+        }
+        return dataHora;
+    }
+    
+    public String retornaDataHoraInicio(Reserva re){
+        String dataHora = "";
+        for(Reserva r : reservas){
+            if(r.getCodigoReserva() == re.getCodigoReserva()){
+                dataHora = formatarData(r.getDataHoraInicioEvento());
+                reserva.setDataHoraInicioEvento(r.getDataHoraInicioEvento());
+            }
+        }
+        return dataHora;
+    }
+    
+    public String retornaDataHoraFim(Reserva re){
+        String dataHora = "";
+        for(Reserva r : reservas){
+            if(r.getCodigoReserva() == re.getCodigoReserva()){
+                dataHora = formatarData(r.getDataHoraFimEvento());
+                reserva.setDataHoraFimEvento(r.getDataHoraFimEvento());
+            }
+        }
+        return dataHora;
+    }
+    
+    public String formatarData(Date d){
         SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        formatador.format(data);
+        String data = formatador.format(d);
         return data;
     }
     
@@ -246,20 +277,5 @@ public class ReservaMB {
      */
     public void setReservas(List<Reserva> reservas) {
         this.reservas = reservas;
-    }
-
-    /**
-     * @return the listaDeStatus
-     */
-    public List<String> getListaDeStatus() {
-        return listaDeStatus;
-    }
-
-    /**
-     * @param listaDeStatus the listaDeStatus to set
-     */
-    public void addListaDeStatus() {
-        listaDeStatus.add("Reserva Validada");
-        listaDeStatus.add("Reserva Pendente");
     }
 }

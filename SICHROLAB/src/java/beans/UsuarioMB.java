@@ -50,7 +50,7 @@ public class UsuarioMB {
                 daoUsuario.create(usuario);
                 usuario = new Usuario();
                 setMensagem("Usuário cadastrado com sucesso");
-           }else{
+            }else{
             setMensagem("Senhas não conferem");
             }
         }catch(Exception ex){

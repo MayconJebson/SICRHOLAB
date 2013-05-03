@@ -54,7 +54,7 @@
                                 <h:outputText value="Categoria" />
                             </f:facet>
                             <p:commandLink value="#{u.categoriaUsuario.descricao}" update=":formulario">
-                                <f:setPropertyActionListener value="#{u}" target="#{usuarioMB.usuario.categoriaUsuario}"/>  
+                                <f:setPropertyActionListener value="#{u}" target="#{usuarioMB.usuario}"/>  
                             </p:commandLink>
                         </p:column>
                         <p:column>

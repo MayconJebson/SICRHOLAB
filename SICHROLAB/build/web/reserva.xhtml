@@ -37,7 +37,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Data/Hora da Reserva" />   
                             </f:facet>
-                            <p:commandLink value="#{r.dataHora}" update=":formulario">
+                            <p:commandLink value="#{reservaMB.retornaDataHoraAtual(r)}" update=":formulario">
                                 <f:setPropertyActionListener value="#{r}" target="#{reservaMB.reserva}"/> 
                             </p:commandLink>
                         </p:column>
@@ -45,7 +45,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Inicio Do Evento" />   
                             </f:facet>   
-                            <p:commandLink value="#{r.dataHoraInicioEvento}" update=":formulario">
+                            <p:commandLink value="#{reservaMB.retornaDataHoraInicio(r)}" update=":formulario">
                                 <f:setPropertyActionListener value="#{r}" target="#{reservaMB.reserva}"/> 
                             </p:commandLink>
                         </p:column>
@@ -53,7 +53,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Fim do Evento" />
                             </f:facet>   
-                            <p:commandLink value="#{r.dataHoraFimEvento}" update=":formulario">
+                            <p:commandLink value="#{reservaMB.retornaDataHoraFim(r)}" update=":formulario">
                                 <f:setPropertyActionListener value="#{r}" target="#{reservaMB.reserva}"/> 
                             </p:commandLink>
                         </p:column>
@@ -78,7 +78,7 @@
                                 <h:outputText value="Sala" />
                             </f:facet>   
                             <p:commandLink value="#{r.sala.nomeSala}" update=":formulario">
-                                <f:setPropertyActionListener value="#{r}" target="#{reservaMB.sala}"/> 
+                                <f:setPropertyActionListener value="#{r}" target="#{reservaMB.reserva}"/> 
                             </p:commandLink>
                         </p:column>
                         <p:column >  
@@ -86,7 +86,7 @@
                                 <h:outputText value="Usuário" />
                             </f:facet>   
                             <p:commandLink value="#{r.usuario.nome}" update=":formulario">
-                                <f:setPropertyActionListener value="#{r}" target="#{reservaMB.usuario}"/> 
+                                <f:setPropertyActionListener value="#{r}" target="#{reservaMB.reserva}"/> 
                             </p:commandLink>
                         </p:column>
                         <p:column >  
@@ -94,7 +94,7 @@
                                 <h:outputText value="Turma" />
                             </f:facet>   
                             <p:commandLink value="#{r.turma.numero_turma}" update=":formulario">
-                                <f:setPropertyActionListener value="#{r}" target="#{reservaMB.turma}"/> 
+                                <f:setPropertyActionListener value="#{r}" target="#{reservaMB.reserva}"/> 
                             </p:commandLink>
                         </p:column>
                         <p:column >  
@@ -102,7 +102,7 @@
                                 <h:outputText value="Categoria de Evento" />
                             </f:facet>   
                             <p:commandLink value="#{r.categoriaEvento.prioridade}" update=":formulario">
-                                <f:setPropertyActionListener value="#{r}" target="#{reservaMB.categoriaDeEvento}"/> 
+                                <f:setPropertyActionListener value="#{r}" target="#{reservaMB.reserva}"/> 
                             </p:commandLink>
                         </p:column>
                         <p:column >  
@@ -143,7 +143,7 @@
                             
                             <h:outputLabel value="Sala:*" />
                             <h:selectOneMenu id="sala" requiredMessage="Campo Obrigatório" value="#{reservaMB.sala.codigoSala}" required="true">
-                                <f:selectItem itemLabel="Selecione a Sala" itemValue="" />  
+                                <f:selectItem itemLabel="Selecione a Sala" itemValue="" />
                                 <f:selectItems var="s" value="#{reservaMB.listaSalas()}" itemValue="#{s.codigoSala}" itemLabel="#{s.nomeSala}"/>  
                             </h:selectOneMenu><p:message for="sala" />
                             
