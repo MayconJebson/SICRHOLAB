@@ -123,11 +123,11 @@
                         <h:panelGrid columns="3">
                             
                             <h:outputLabel value="Data/Hora do Inicio do Evento:*"/>
-                            <p:calendar id="dataHoraInicio" value="#{reservaMB.reserva.dataHoraInicioEvento}" pattern="dd/MM/yyyy HH:mm" required="true" requiredMessage="Campo Obrigatório" />
+                            <p:calendar id="dataHoraInicio" disabledWeekends="true" value="#{reservaMB.inicioEvento}" pattern="dd/MM/yyyy HH:mm" required="true" requiredMessage="Campo Obrigatório" />
                             <p:message for="dataHoraInicio" />
                             
                             <h:outputLabel value="Data/Hora do Fim do Evento:*"/>
-                            <p:calendar id="dataHoraFim" value="#{reservaMB.reserva.dataHoraFimEvento}" pattern="dd/MM/yyyy HH:mm" required="true" requiredMessage="Campo Obrigatório" />
+                            <p:calendar id="dataHoraFim" value="#{reservaMB.fimEvento}" pattern="dd/MM/yyyy HH:mm" required="true" requiredMessage="Campo Obrigatório" />
                             <p:message for="dataHoraFim" />
                             
                             <h:outputLabel value="Periodicidade:*" />

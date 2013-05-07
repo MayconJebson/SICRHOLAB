@@ -48,6 +48,8 @@ public class ReservaMB {
     private CategoriaDeEvento categoriaDeEvento = new CategoriaDeEvento();
     private String mensagem;
     private List<Reserva> reservas = new ArrayList<Reserva>();
+    private Date inicioEvento = null;
+    private Date fimEvento = null;
     
     /**
      * Creates a new instance of ReservaMB
@@ -60,6 +62,8 @@ public class ReservaMB {
         try{
             reserva.setCodigoReserva(null);
             reserva.setDataHora(new Date());
+            reserva.setDataHoraInicioEvento(inicioEvento);
+            reserva.setDataHoraFimEvento(fimEvento);
             reserva.setTurma(turma);
             reserva.setCategoriaEvento(categoriaDeEvento);
             reserva.setUsuario(usuario);
@@ -70,6 +74,8 @@ public class ReservaMB {
             usuario = new Usuario();
             sala = new Sala();
             categoriaDeEvento = new CategoriaDeEvento();
+            inicioEvento = null;
+            fimEvento = null;
             setMensagem("Cadastro realizado com sucesso");
         }catch(Exception ex){
            setMensagem("Cadastro já existente no sistema");
@@ -81,6 +87,8 @@ public class ReservaMB {
     public void alterarReserva() {
         try {
             reserva.setDataHora(new Date());
+            reserva.setDataHoraInicioEvento(inicioEvento);
+            reserva.setDataHoraFimEvento(fimEvento);
             reserva.setTurma(turma);
             reserva.setCategoriaEvento(categoriaDeEvento);
             reserva.setUsuario(usuario);
@@ -91,6 +99,8 @@ public class ReservaMB {
             usuario = new Usuario();
             sala = new Sala();
             categoriaDeEvento = new CategoriaDeEvento();
+            inicioEvento = null;
+            fimEvento = null;
             setMensagem("Cadastro alterado com sucesso");
         } catch (NonexistentEntityException ex) {
             setMensagem("Cadastro não pode ser alterado");
@@ -110,6 +120,8 @@ public class ReservaMB {
             usuario = new Usuario();
             sala = new Sala();
             categoriaDeEvento = new CategoriaDeEvento();
+            inicioEvento = null;
+            fimEvento = null;
             setMensagem("Cadastro excluído com sucesso");
         } catch (NonexistentEntityException ex) {
             setMensagem("Cadastro não pode ser excluído");
@@ -192,6 +204,12 @@ public class ReservaMB {
      * @param reserva the reserva to set
      */
     public void setReserva(Reserva reserva) {
+        setSala(reserva.getSala());
+        setTurma(reserva.getTurma());
+        setUsuario(reserva.getUsuario());
+        setCategoriaDeEvento(reserva.getCategoriaEvento());
+        setInicioEvento(reserva.getDataHoraInicioEvento());
+        setFimEvento(reserva.getDataHoraFimEvento());
         this.reserva = reserva;
     }
 
@@ -277,5 +295,33 @@ public class ReservaMB {
      */
     public void setReservas(List<Reserva> reservas) {
         this.reservas = reservas;
+    }
+
+    /**
+     * @return the inicioEvento
+     */
+    public Date getInicioEvento() {
+        return inicioEvento;
+    }
+
+    /**
+     * @param inicioEvento the inicioEvento to set
+     */
+    public void setInicioEvento(Date inicioEvento) {
+        this.inicioEvento = inicioEvento;
+    }
+
+    /**
+     * @return the fimEvento
+     */
+    public Date getFimEvento() {
+        return fimEvento;
+    }
+
+    /**
+     * @param fimEvento the fimEvento to set
+     */
+    public void setFimEvento(Date fimEvento) {
+        this.fimEvento = fimEvento;
     }
 }
