@@ -85,7 +85,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Usuário" />
                             </f:facet>   
-                            <p:commandLink value="#{r.usuario.nome}" update=":formulario">
+                            <p:commandLink value="#{r.usuario.matricula}" update=":formulario">
                                 <f:setPropertyActionListener value="#{r}" target="#{reservaMB.reserva}"/> 
                             </p:commandLink>
                         </p:column>
@@ -101,7 +101,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Categoria de Evento" />
                             </f:facet>   
-                            <p:commandLink value="#{r.categoriaEvento.prioridade}" update=":formulario">
+                            <p:commandLink value="#{r.categoriaEvento.descricao}" update=":formulario">
                                 <f:setPropertyActionListener value="#{r}" target="#{reservaMB.reserva}"/> 
                             </p:commandLink>
                         </p:column>
@@ -115,6 +115,7 @@
                         </p:column>
                     </p:dataTable>
                 </h:form>
+                
                 <hr></hr>
 
                 <h:form id="formulario">
@@ -135,10 +136,10 @@
                             <p:message for="periodicidade" />
                             
                             <h:outputLabel value="Status:*" />
-                            <h:selectOneMenu id="status" requiredMessage="Campo Obrigatório" value="#{reservaMB.reserva.status}" required="true">
-                                <f:selectItem itemLabel="Selecione uma opção" itemValue="" />
+                            <h:selectOneMenu id="status" disabled="true" requiredMessage="Campo Obrigatório" value="#{reservaMB.reserva.status}" required="true">
                                 <f:selectItem itemValue="Reserva Pendente" itemLabel="Reserva Pendente"/>
-                                <f:selectItem itemValue="Reserva Validada" itemLabel="Reserva Validada"/>
+                                <f:selectItem itemValue="Reserva Autorizada" itemLabel="Reserva Autorizada"/>
+                                <f:selectItem itemValue="Reserva Não Autorizada" itemLabel="Reserva Não Autorizada"/>
                             </h:selectOneMenu><p:message for="status" />
                             
                             <h:outputLabel value="Sala:*" />
@@ -150,11 +151,11 @@
                             <h:outputLabel value="Usuário:*" />
                             <h:selectOneMenu id="usuario" requiredMessage="Campo Obrigatório" value="#{reservaMB.usuario.matricula}" required="true">
                                 <f:selectItem itemLabel="Selecione o Usuário" itemValue="" />  
-                                <f:selectItems var="u" value="#{reservaMB.listaUsuarios()}" itemValue="#{u.matricula}" itemLabel="#{u.nome}"/>  
+                                <f:selectItems var="u" value="#{reservaMB.listaUsuarios()}" itemValue="#{u.matricula}" itemLabel="#{u.matricula}"/>  
                             </h:selectOneMenu><p:message for="usuario" />
                             
                             <h:outputLabel value="Turma:*" />
-                            <h:selectOneMenu id="turma" requiredMessage="Campo Obrigatório" value="#{reservaMB.turma.cod_turma}" required="true">
+                            <h:selectOneMenu id="turma" value="#{reservaMB.turma.cod_turma}">
                                 <f:selectItem itemLabel="Selecione a Turma" itemValue="" />  
                                 <f:selectItems var="t" value="#{reservaMB.listaTurmas()}" itemValue="#{t.cod_turma}" itemLabel="#{t.numero_turma}"/>  
                             </h:selectOneMenu><p:message for="turma" />
@@ -162,7 +163,7 @@
                             <h:outputLabel value="Categoria de Evento:*" />
                             <h:selectOneMenu id="categoriaEvento" requiredMessage="Campo Obrigatório" value="#{reservaMB.categoriaDeEvento.codCatEvento}" required="true">
                                 <f:selectItem itemLabel="Selecione a Categoria de Evento" itemValue="" />  
-                                <f:selectItems var="c" value="#{reservaMB.listaCategoriaDeEventos()}" itemValue="#{c.codCatEvento}" itemLabel="#{c.prioridade}"/>  
+                                <f:selectItems var="c" value="#{reservaMB.listaCategoriaDeEventos()}" itemValue="#{c.codCatEvento}" itemLabel="#{c.descricao}"/>  
                             </h:selectOneMenu><p:message for="sala" />
                             
                             <h:outputLabel value="Descrição:*" />
@@ -176,37 +177,24 @@
                        <b><h:outputText value="#{reservaMB.mensagem}" style="font: bolder"/></b>
                     </p:panel>
                 </h:form>
-                <!--<hr></hr>
                 
-                 
-                <h:form id="formPesquisa">
-                    <p:panel id="formPanelPesquisa" header="Pesquisar por Ano Letivo">
-                        <h:panelGrid columns="3">
-                            <h:outputLabel value="Ano Letivo:*"/>
-                            <p:inputMask mask="9999" id="ano" value ="#{turmaMB.anoLetivo}" required="true" requiredMessage="Campo Obrigatório" label="Ano Letivo"/>
-                            <p:message for="ano"/>
-                        </h:panelGrid>
-                        <p:commandButton value="Pesquisar" action="#{turmaMB.pesquisarTurmaPorAno()}" update="formPesquisa, :tabela, :formulario"/>
-                    </p:panel>
-                </h:form>
                 <hr></hr>
-                <h:form id="formPesquisaPorNumero">
-                    <p:panel id="formPanelPesquisa" header="Pesquisar por Número da Turma">
+                
+                <h:form id="formPesquisa">
+                    <p:panel id="formPanelPesquisa" header="Pesquisar por Status, Código da Turma ou Descrição">
                         <h:panelGrid columns="3">
-                            <h:outputLabel value="Número da Turma:*"/>
-                            <p:inputMask mask="9999" id="numeroT" value ="#{turmaMB.numeroTurma}" required="true" requiredMessage="Campo Obrigatório" label="Nome do Curso"/>
-                            <p:message for="numeroT"/>
-                            <p:commandButton value="Pesquisar" action="#{turmaMB.pesquisarTurmaPorNumero()}" update=":formPesquisa, :tabela, :formulario"/>
+                            <p:inputText id="pesquisaReserva" style="text-transform: lowercase" maxlength="60" value ="#{reservaMB.reservaPesquisada}" required="true" requiredMessage="Campo Obrigatório"/><p:message for="pesquisaReserva"/>
                         </h:panelGrid>
+                        <p:commandButton value="Pesquisar" action="#{reservaMB.pesquisarPorReserva()}" update="formPesquisa, :tabela, :formulario"/>
                     </p:panel>
                 </h:form>
                 <hr></hr>
                 <h:form id="formPesquisaTodos">
-                    <p:panel id="formPanelPesquisa" header="Pesquisar Todas as Turmas">
-                        <p:commandButton value="Pesquisar Todas" action="#{turmaMB.pesquisar()}" update=":formPesquisa, :tabela, :formulario"/>
+                    <p:panel id="formPanelPesquisa" header="Pesquisar Todas as Reservas">
+                        <p:commandButton value="Pesquisar Todas" action="#{reservaMB.pesquisar()}" update=":formPesquisa, :tabela, :formulario"/>
                     </p:panel>
                 </h:form>
-!-->
+
             </ui:define>
 
         </ui:composition>

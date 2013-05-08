@@ -154,8 +154,6 @@ public class UsuarioMB {
     public void setConfirmacao(String confirmacao) {
         this.confirmacao = confirmacao;
     }
-    
-    
 
     public void pesquisar() {
         usuarios = daoUsuario.findUsuarioEntities();

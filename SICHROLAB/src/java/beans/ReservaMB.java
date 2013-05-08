@@ -50,6 +50,7 @@ public class ReservaMB {
     private List<Reserva> reservas = new ArrayList<Reserva>();
     private Date inicioEvento = null;
     private Date fimEvento = null;
+    private String reservaPesquisada;
     
     /**
      * Creates a new instance of ReservaMB
@@ -171,6 +172,16 @@ public class ReservaMB {
     
     public void pesquisar() {
         setReservas(reservaDAO.findReservaEntities());
+    }
+    
+    public void pesquisarPorReserva() {
+        reservas = new ArrayList<Reserva>();
+        for (Reserva r : reservaDAO.findReservaEntities()) {
+            if ((r.getStatus().toLowerCase().contains(reservaPesquisada) || (String.valueOf(r.getTurma().getNumero_turma()).contains(reservaPesquisada) || (r.getDescricao().toLowerCase().contains(reservaPesquisada))))) {
+                reservas.add(r);
+            }
+        }
+        setReservaPesquisada("");
     }
     
     public List<Reserva> listaReservas() {
@@ -323,5 +334,19 @@ public class ReservaMB {
      */
     public void setFimEvento(Date fimEvento) {
         this.fimEvento = fimEvento;
+    }
+
+    /**
+     * @return the reservaPesquisada
+     */
+    public String getReservaPesquisada() {
+        return reservaPesquisada;
+    }
+
+    /**
+     * @param reservaPesquisada the reservaPesquisada to set
+     */
+    public void setReservaPesquisada(String reservaPesquisada) {
+        this.reservaPesquisada = reservaPesquisada;
     }
 }
