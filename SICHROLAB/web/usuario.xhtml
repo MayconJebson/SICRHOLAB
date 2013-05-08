@@ -122,8 +122,8 @@
                 <h:form id="formPesquisa">
                     <p:panel id="formPanelPesquisa" header="Pesquisar Usuário">
                         <h:panelGrid columns="3">
-                            <h:outputLabel value=""/><p:inputText id="nomeDoUsuario" style="text-transform: lowercase" maxlength="30" value ="#{usuarioMB.usuarioPesquisado}" required="true" requiredMessage="Campo Obrigatório"/><p:message for="nomeDoUsuario"/>
-                            <p:inputText id="nomeDoUsuario" style="text-transform: lowercase" maxlength="30" value ="#{usuarioMB.usuarioPesquisado}" required="true" requiredMessage="Campo Obrigatório"/><p:message for="nomeDoUsuario"/>
+                            <p:inputText id="nomeDoUsuario" style="text-transform: lowercase" maxlength="30" value ="#{usuarioMB.usuarioPesquisado}" required="true" requiredMessage="Campo Obrigatório"/>
+                            <p:message for="nomeDoUsuario"/>
                         </h:panelGrid>
                         <p:commandButton value="Pesquisar" action="#{usuarioMB.pesquisarPorUsuario()}" update=":formPesquisa, :tabela, :formulario"/>
                     </p:panel>
