@@ -30,6 +30,12 @@ public class LoginMB {
     private Usuario usuario = new Usuario();;
     
     private String mensagem;
+    
+    private boolean logado = false;
+    
+    private String pagina = null;
+            
+    private String ultimaPag = null;
 
     public LoginMB() {
     }
@@ -39,13 +45,17 @@ public class LoginMB {
         usuario = daoUsuario.findUsuario(this.usuario);
         
         if (usuario!=null){
+            logado = true;
             setMensagem("");
-            return "/index.xhtml";
+            return "index.xhtml";
         }
         
         usuario = new Usuario();
+        FacesContext fc = FacesContext.getCurrentInstance();
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login ou senha incorreto!", "");
+        fc.addMessage(pagina, msg);        
         setMensagem("Login ou senha incorreto!");
-        return "/login.xhtml";
+        return "login.xhtml";
        
     }
     
@@ -72,5 +82,52 @@ public class LoginMB {
      */
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
+    }
+
+    /**
+     * @return the pagina
+     */
+    public String getPagina() {
+        return pagina;
+    }
+
+    /**
+     * @param pagina the pagina to set
+     */
+    public void setPagina(String pagina) {
+        this.pagina = pagina;
+    }
+    
+    public boolean veioDeOutraPagina(){
+        return getUltimaPag() != null;
+    }
+    
+    public void setUltimaPag(String u){
+        ultimaPag = u;
+    }
+    
+    public boolean logado()
+    {
+        return logado;
+        
+    }
+
+    /**
+     * @return the ultimaPag
+     */
+    public String getUltimaPag() {
+        
+        if ((ultimaPag == null) || (ultimaPag.contains("icon")) || (ultimaPag.contains("img")) || (ultimaPag.contains("index")))
+        {
+            return "../index.xhtml";
+        }
+        return ultimaPag;
+    }
+    
+    public String logout(){
+        usuario = new Usuario();
+        logado = false;
+        
+        return "../index.xhtml";
     }
 }

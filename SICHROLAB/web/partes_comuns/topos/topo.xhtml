@@ -23,7 +23,10 @@
                 <ul class="nav">
                     <li class="" ><h:link ><i class="icon icon-user"></i> <span class="text">Perfil</span></h:link></li>
                     <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Configurações</span></a></li>
-                    <li class=""><h:link outcome="login"><i class="icon icon-share-alt"></i> <span class="text">Entrar no sistema</span></h:link></li>
+                    <li class="">
+                        <h:link outcome="login.xhtml"  rendered="#{!loginMB.logado()}" ><i class="icon icon-share-alt"></i> <span class="text">Entrar no sistema</span></h:link>
+                        <h:link outcome="index.xhtml" onclick="#{loginMB.logout()}" rendered="#{loginMB.logado()}" value="Sair"/>                       
+                    </li>
                 </ul>
             </div>
 
@@ -32,17 +35,17 @@
             <div id="sidebar">
                 <a href="#" class="visible-phone"><i class="icon icon-home"></i> Menu</a>
                 <ul>
-                    <li class="active"><h:link outcome="index"><i class="icon icon-home"></i> <span>Início</span></h:link> </li>
+                    <li class="active"><h:link outcome="index.xhtml"><i class="icon icon-home"></i> <span>Início</span></h:link> </li>
                     <li> <a href="#"><i class="icon icon-inbox"></i> <span>Reservas solicitadas</span></a> </li>
                     <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>Adicionar</span></a>
                         <ul>
-                            <li><h:link outcome="usuario">Menu Usuário</h:link></li>
-                            <li><h:link outcome="categoriaUs">Categoria usuário</h:link></li>
-                            <li><h:link outcome="categoriaEv">Categoria de eventos</h:link></li>
-                            <li><h:link outcome="sala">Menu Salas</h:link></li>  
-                            <li><h:link outcome="turma">Turmas</h:link></li>
-                            <li><h:link outcome="disciplina">Disciplinas</h:link></li>
-                            <li><h:link outcome="reserva">Reservas</h:link></li>
+                            <li><h:link outcome="/admin/usuario">Menu Usuário</h:link></li>
+                            <li><h:link outcome="/admin/categoriaUs">Categoria usuário</h:link></li>
+                            <li><h:link outcome="/admin/categoriaEv">Categoria de eventos</h:link></li>
+                            <li><h:link outcome="/admin/sala">Menu Salas</h:link></li>  
+                            <li><h:link outcome="/admin/turma">Turmas</h:link></li>
+                            <li><h:link outcome="/admin/disciplina">Disciplinas</h:link></li>
+                            <li><h:link outcome="/admin/reserva">Reservas</h:link></li>
                         </ul>
                     </li>
                 </ul>
@@ -51,6 +54,7 @@
             
 
         </ui:composition>
+        
 
     </h:body>
 </html>
