@@ -4,9 +4,13 @@
  */
 package beans;
 
+import dao.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Disciplina;
+import org.eclipse.persistence.sessions.Session;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,6 +23,12 @@ import static org.junit.Assert.*;
  * @author maycon
  */
 public class DisciplinaMBTest {
+    
+    private DisciplinaMB inserirMB = new DisciplinaMB();
+    private DisciplinaMB alterarMB = new DisciplinaMB();
+    private DisciplinaMB excluirMB = new DisciplinaMB();
+    private DisciplinaMB testeMB = new DisciplinaMB();
+    //Criar apenas com um MB
     
     public DisciplinaMBTest() {
     }
@@ -33,10 +43,35 @@ public class DisciplinaMBTest {
     
     @Before
     public void setUp() {
+        inserirMB.getDisciplina().setCod_disciplina("BSI2101");
+        inserirMB.getDisciplina().setCarga_horaria(60);
+        inserirMB.getDisciplina().setCurso("Sistemas de Informação");
+        inserirMB.getDisciplina().setNome("Redes");
+        
+        alterarMB.getDisciplina().setCod_disciplina("BSI2102");
+        alterarMB.getDisciplina().setCarga_horaria(60);
+        alterarMB.getDisciplina().setCurso("Sistemas de Informação");
+        alterarMB.getDisciplina().setNome("Arquitetura");
+        
+        excluirMB.getDisciplina().setCod_disciplina("BSI2103");
+        excluirMB.getDisciplina().setCarga_horaria(60);
+        excluirMB.getDisciplina().setCurso("Sistemas de Informação");
+        excluirMB.getDisciplina().setCurso("Programação");
+        
+        testeMB.getDisciplina().setCod_disciplina("BSI2104");
+        testeMB.getDisciplina().setCarga_horaria(60);
+        testeMB.getDisciplina().setCurso("Sistemas de Informação");
+        testeMB.getDisciplina().setCurso("Lógica");
     }
     
     @After
     public void tearDown() {
+        try {
+            inserirMB.disciplinaDAO.destroy("BSI2101");
+            alterarMB.disciplinaDAO.destroy("BSI2102");
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(DisciplinaMBTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -44,15 +79,9 @@ public class DisciplinaMBTest {
      */
     @Test
     public void testInserirDisciplina() {
-        System.out.println("inserirDisciplina");
-        DisciplinaMB instance = new DisciplinaMB();
-        instance.getDisciplina().setCod_disciplina("BSI2102");
-        instance.getDisciplina().setCarga_horaria(60);
-        instance.getDisciplina().setCurso("Sistemas de Informação");
-        instance.getDisciplina().setNome("Redes");
-        Disciplina d = instance.getDisciplina();
-        instance.inserirDisciplina();
-        assertEquals(d, instance.disciplinaDAO.findDisciplina("BSI2102"));
+        Disciplina d = inserirMB.getDisciplina();
+        inserirMB.inserirDisciplina();
+        assertEquals(d, inserirMB.disciplinaDAO.findDisciplina("BSI2101"));
     }
 
     /**
@@ -60,12 +89,10 @@ public class DisciplinaMBTest {
      */
     @Test
     public void testAlterarDisciplina() {
-        System.out.println("alterarDisciplina");
-        DisciplinaMB instance = new DisciplinaMB();
-        instance.setDisciplina(instance.disciplinaDAO.findDisciplina("BSI2101"));
-        Disciplina d = instance.getDisciplina();
-        instance.alterarDisciplina();
-        assertEquals(d, instance.disciplinaDAO.findDisciplina(d.getCod_disciplina()));
+        alterarMB.getDisciplina().setNome("ESII");
+        Disciplina d = alterarMB.getDisciplina();
+        alterarMB.alterarDisciplina();
+        assertEquals(d, alterarMB.disciplinaDAO.findDisciplina(d.getCod_disciplina()));
     }
 
     /**
@@ -73,12 +100,9 @@ public class DisciplinaMBTest {
      */
     @Test
     public void testExcluirDisciplina() {
-        System.out.println("excluirDisciplina");
-        DisciplinaMB instance = new DisciplinaMB();
-        instance.setDisciplina(instance.disciplinaDAO.findDisciplina("BSI2103"));
-        String s = instance.getDisciplina().getCod_disciplina();
-        instance.excluirDisciplina();
-        assertNull(instance.disciplinaDAO.findDisciplina(s));
+        Disciplina d = excluirMB.getDisciplina();
+        excluirMB.excluirDisciplina();
+        assertNull(excluirMB.disciplinaDAO.findDisciplina(d.getCod_disciplina()));
     }
 
     /**
@@ -86,11 +110,9 @@ public class DisciplinaMBTest {
      */
     @Test
     public void testPesquisar() {
-        System.out.println("pesquisar");
-        DisciplinaMB instance = new DisciplinaMB();
-        instance.pesquisar();
-        List<Disciplina> d = instance.disciplinaDAO.findDisciplinaEntities();
-        assertEquals(d, instance.getDisciplinas());
+        testeMB.pesquisar();
+        List<Disciplina> ds = testeMB.disciplinaDAO.findDisciplinaEntities();
+        assertEquals(ds, testeMB.getDisciplinas());
     }
 
     /**
@@ -98,18 +120,14 @@ public class DisciplinaMBTest {
      */
     @Test
     public void testPesquisarPorNomeDaDisciplina() {
-        System.out.println("pesquisarPorNomeDaDisciplina");
-        DisciplinaMB instance = new DisciplinaMB();
-        instance.setNome_disciplina("Redes");
-        String nomeDaDisciplina = instance.getNome_disciplina();
-        instance.pesquisarPorNomeDaDisciplina(); 
-        List<Disciplina> d = new ArrayList<Disciplina>();
-        for(Disciplina s : instance.disciplinaDAO.findDisciplinaEntities()){
-            if(s.getNome().toUpperCase().contains(nomeDaDisciplina.toUpperCase())){
-                d.add(s);
+        List<Disciplina> ds = new ArrayList<Disciplina>();
+        for(Disciplina s : testeMB.disciplinaDAO.findDisciplinaEntities()){
+            if(s.getNome().toUpperCase().contains(testeMB.getDisciplina().getCod_disciplina().toUpperCase())){
+                ds.add(s);
             }
         }
-        assertEquals(d, instance.getDisciplinas());
+        testeMB.pesquisarPorNomeDaDisciplina();
+        assertEquals(ds, testeMB.getDisciplinas());
     }
 
     /**

@@ -53,6 +53,7 @@ public class AutorizacaoPL implements PhaseListener {
         if (lmb.logado())
         {
             String tipo = lmb.getUsuario().getCategoriaUsuario().getDescricao();
+            tipo = tipo.toLowerCase();
             if (tipo.equals("adm")) {
                 return;
             }
