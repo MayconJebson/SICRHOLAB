@@ -17,6 +17,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -45,8 +46,8 @@ public class AutorizacaoPL implements PhaseListener {
         if(viewId.startsWith("/publico/")){
             return;
         }
-        
         Application app = context.getApplication();
+        
         LoginMB lmb = app.evaluateExpressionGet(context, "#{loginMB}", LoginMB.class);
         
         lmb.setPagina(viewId);
@@ -68,8 +69,7 @@ public class AutorizacaoPL implements PhaseListener {
         UIViewRoot novaPag = viewHandler.createView(context, "/login.xhtml");
         context.setViewRoot(novaPag);
         
-        lmb.setUltimaPag(viewId);
-        
+        lmb.setUltimaPag(viewId);       
         
     }
 

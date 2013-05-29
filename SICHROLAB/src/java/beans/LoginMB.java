@@ -26,8 +26,8 @@ public class LoginMB {
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("SICHROLABPU");
     
     UsuarioJpaController daoUsuario = new UsuarioJpaController(factory);
-    
-    private Usuario usuario = new Usuario();;
+
+    private Usuario usuario;
     
     private String mensagem;
     
@@ -38,6 +38,7 @@ public class LoginMB {
     private String ultimaPag = null;
 
     public LoginMB() {
+         usuario = new Usuario();
     }
     
     public String login(){
