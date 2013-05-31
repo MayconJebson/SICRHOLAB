@@ -50,6 +50,8 @@ public class ReservaMB {
     private List<Reserva> reservas = new ArrayList<Reserva>();
     private Date inicioEvento = null;
     private Date fimEvento = null;
+    private String horaInicio = "";
+    private String horaFim = "";
     private String reservaPesquisada;
     
     /**
@@ -77,6 +79,8 @@ public class ReservaMB {
             categoriaDeEvento = new CategoriaDeEvento();
             inicioEvento = null;
             fimEvento = null;
+            horaInicio = "";
+            horaFim = "";
             setMensagem("Cadastro realizado com sucesso");
         }catch(Exception ex){
            setMensagem("Cadastro já existente no sistema");
@@ -102,6 +106,8 @@ public class ReservaMB {
             categoriaDeEvento = new CategoriaDeEvento();
             inicioEvento = null;
             fimEvento = null;
+            horaInicio = "";
+            horaFim = "";
             setMensagem("Cadastro alterado com sucesso");
         } catch (NonexistentEntityException ex) {
             setMensagem("Cadastro não pode ser alterado");
@@ -123,6 +129,8 @@ public class ReservaMB {
             categoriaDeEvento = new CategoriaDeEvento();
             inicioEvento = null;
             fimEvento = null;
+            horaInicio = "";
+            horaFim = "";
             setMensagem("Cadastro excluído com sucesso");
         } catch (NonexistentEntityException ex) {
             setMensagem("Cadastro não pode ser excluído");
@@ -221,6 +229,13 @@ public class ReservaMB {
         setCategoriaDeEvento(reserva.getCategoriaEvento());
         setInicioEvento(reserva.getDataHoraInicioEvento());
         setFimEvento(reserva.getDataHoraFimEvento());
+        if(reserva.getDataHoraInicioEvento().getMinutes() == 0){
+            setHoraInicio(reserva.getDataHoraInicioEvento().getHours()+":"+reserva.getDataHoraInicioEvento().getMinutes()+"0");
+        }
+        else{
+            setHoraInicio(reserva.getDataHoraInicioEvento().getHours()+":"+reserva.getDataHoraInicioEvento().getMinutes());
+        }
+        setHoraFim(reserva.getDataHoraFimEvento().getHours()+":"+reserva.getDataHoraFimEvento().getMinutes());
         this.reserva = reserva;
     }
 
@@ -348,5 +363,39 @@ public class ReservaMB {
      */
     public void setReservaPesquisada(String reservaPesquisada) {
         this.reservaPesquisada = reservaPesquisada;
+    }
+
+    /**
+     * @return the horaInicio
+     */
+    public String getHoraInicio() {
+        return horaInicio;
+    }
+
+    /**
+     * @param horaInicio the horaInicio to set
+     */
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
+        String array[] = horaInicio.split(":"); 
+        inicioEvento.setHours(Integer.parseInt(array[0]));
+        inicioEvento.setMinutes(Integer.parseInt(array[1]));
+    }
+
+    /**
+     * @return the horaFim
+     */
+    public String getHoraFim() {
+        return horaFim;
+    }
+
+    /**
+     * @param horaFim the horaFim to set
+     */
+    public void setHoraFim(String horaFim) {
+        this.horaFim = horaFim;
+        String array[] = horaFim.split(":"); 
+        fimEvento.setHours(Integer.parseInt(array[0]));
+        fimEvento.setMinutes(Integer.parseInt(array[1]));
     }
 }
