@@ -196,7 +196,7 @@
                                 <f:selectItems var="u" value="#{reservaMB.listaUsuarios()}" itemValue="#{u.matricula}" itemLabel="#{u.matricula}"/>  
                             </h:selectOneMenu><p:message for="usuario" />
                             
-                            <h:outputLabel value="Turma:*" />
+                            <h:outputLabel value="Turma:" />
                             <h:selectOneMenu id="turma" value="#{reservaMB.turma.cod_turma}">
                                 <f:selectItem itemLabel="Selecione a Turma" itemValue="" />  
                                 <f:selectItems var="t" value="#{reservaMB.listaTurmas()}" itemValue="#{t.cod_turma}" itemLabel="#{t.numero_turma}"/>  

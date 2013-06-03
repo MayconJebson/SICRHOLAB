@@ -6,7 +6,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import modelo.Disciplina;
 import modelo.Usuario;
 
-@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2013-05-30T21:27:58")
+@Generated(value="EclipseLink-2.3.2.v20111125-r10461", date="2013-06-03T16:47:36")
 @StaticMetamodel(Turma.class)
 public class Turma_ { 
 

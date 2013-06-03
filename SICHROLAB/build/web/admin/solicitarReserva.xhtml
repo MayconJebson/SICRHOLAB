@@ -23,12 +23,8 @@
                 <h:form id="formulario">
                     <p:panel id="formPanel" header="Manutenção das Reservas">
                         <h:inputHidden value="#{reservaMB.reserva.codigoReserva}"/>
-                        <h:panelGrid columns="3">
-                            
-                            <h:outputLabel value="Data do Inicio do Evento:*"/>
-                            <p:calendar id="dataHoraInicio" disabledWeekends="true" value="#{reservaMB.inicioEvento}" pattern="dd/MM/yyyy" required="true" requiredMessage="Campo Obrigatório" />
-                            <p:message for="dataHoraInicio" />
-                            
+                        <h:panelGrid columns="3">                          
+                                                       
                             <h:outputLabel value="Hora do Inicio do Evento:*" />
                             <h:selectOneMenu id="horaInicio" requiredMessage="Campo Obrigatório" value="#{reservaMB.horaInicio}" required="true">
                                 <f:selectItem itemValue="" itemLabel="Selecione o Horário"/>
@@ -49,10 +45,6 @@
                                 <f:selectItem itemValue="20:35" itemLabel="20:35"/>
                                 <f:selectItem itemValue="21:25" itemLabel="21:25"/>
                             </h:selectOneMenu><p:message for="horaInicio" />
-                            
-                            <h:outputLabel value="Data do Fim do Evento:*"/>
-                            <p:calendar id="dataHoraFim" value="#{reservaMB.fimEvento}" pattern="dd/MM/yyyy" required="true" requiredMessage="Campo Obrigatório" />
-                            <p:message for="dataHoraFim" />
                             
                             <h:outputLabel value="Hora do Fim do Evento:*" />
                             <h:selectOneMenu id="horaFim" requiredMessage="Campo Obrigatório" value="#{reservaMB.horaFim}" required="true">
@@ -75,6 +67,14 @@
                                 <f:selectItem itemValue="22:15" itemLabel="22:15"/>
                             </h:selectOneMenu><p:message for="horaFim" />
                             
+                            <h:outputLabel value="Data do Inicio do Evento:*"/>
+                            <p:calendar id="dataHoraInicio" disabledWeekends="true" value="#{reservaMB.inicioEvento}" pattern="dd/MM/yyyy" required="true" requiredMessage="Campo Obrigatório" />
+                            <p:message for="dataHoraInicio" />
+                            
+                            <h:outputLabel value="Data do Fim do Evento:*"/>
+                            <p:calendar id="dataHoraFim" value="#{reservaMB.fimEvento}" pattern="dd/MM/yyyy" required="true" requiredMessage="Campo Obrigatório" />
+                            <p:message for="dataHoraFim" />                           
+                                                        
                             <h:outputLabel value="Periodicidade:*" />
                             <p:inputText id="periodicidade" value="#{reservaMB.reserva.periodicidade}" required="true" requiredMessage="Campo Obrigatório"/>
                             <p:message for="periodicidade" />

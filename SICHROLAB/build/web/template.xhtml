@@ -14,26 +14,7 @@
         <h:outputStylesheet name="fullcalendar.css" library="css" />
         <h:outputStylesheet name="style.css" library="css" />
         <h:outputStylesheet name="media.css" library="css" />
-        
-        <script type="text/javascript" src="js/jscript.js">
-            function topo()
-            {
-               alert("entrou");
-               var path;
-               if(#{loginMB.logado()})
-               {
-                   path = "/partes_comuns/topos/topo_sair.xhtml";
-                   document.getElementById("topoPath").src = "/partes_comuns/topos/topo_sair.xhtml";
-               }
-               else
-               {
-                   path = "/partes_comuns/topos/topo.xhtml";
-                   document.getElementById("topoPath").src = "/partes_comuns/topos/topo.xhtml";
-               }
-               return path;
-            }
-         </script>
-        
+                
     </h:head>
 
     <h:body onload="var path = topo();">

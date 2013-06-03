@@ -41,7 +41,7 @@ public class ReservaMB {
     TurmaJpaController turmaDAO = new TurmaJpaController(factory);
     CategoriaDeEventoJpaController categoriaDeEventoDAO = new CategoriaDeEventoJpaController(factory);
     
-    private Reserva reserva = new Reserva();
+    private Reserva reserva;
     private Turma turma = new Turma();
     private Usuario usuario = new Usuario();
     private Sala sala = new Sala();
@@ -58,6 +58,8 @@ public class ReservaMB {
      * Creates a new instance of ReservaMB
      */
     public ReservaMB() {
+        reserva = new Reserva();
+        reserva.setStatus("Reserva Pendente");
         pesquisar();
     }
 
@@ -83,7 +85,7 @@ public class ReservaMB {
             horaFim = "";
             setMensagem("Cadastro realizado com sucesso");
         }catch(Exception ex){
-           setMensagem("Cadastro já existente no sistema");
+           setMensagem(ex.getMessage());
            Logger.getLogger(ReservaMB.class.getName()).log(Level.SEVERE, null, ex);
         }
         pesquisar();
