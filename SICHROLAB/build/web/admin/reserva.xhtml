@@ -17,7 +17,7 @@
             <ui:define name="form_manutencao">
 
                 <h:form></h:form>
-                
+
                 <h:form id="tabela">
                     <p:dataTable id="dataTable" var="r" value="#{reservaMB.reservas}" paginator="true" rows="5"  
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -115,18 +115,18 @@
                         </p:column>
                     </p:dataTable>
                 </h:form>
-                
+
                 <hr></hr>
 
                 <h:form id="formulario">
                     <p:panel id="formPanel" header="Manutenção das Reservas">
                         <h:inputHidden value="#{reservaMB.reserva.codigoReserva}"/>
                         <h:panelGrid columns="3">
-                            
+
                             <h:outputLabel value="Data do Inicio do Evento:*"/>
                             <p:calendar id="dataHoraInicio" disabledWeekends="true" value="#{reservaMB.inicioEvento}" pattern="dd/MM/yyyy" required="true" requiredMessage="Campo Obrigatório" />
                             <p:message for="dataHoraInicio" />
-                            
+
                             <h:outputLabel value="Hora do Inicio do Evento:*" />
                             <h:selectOneMenu id="horaInicio" requiredMessage="Campo Obrigatório" value="#{reservaMB.horaInicio}" required="true">
                                 <f:selectItem itemValue="" itemLabel="Selecione o Horário"/>
@@ -147,11 +147,11 @@
                                 <f:selectItem itemValue="20:35" itemLabel="20:35"/>
                                 <f:selectItem itemValue="21:25" itemLabel="21:25"/>
                             </h:selectOneMenu><p:message for="horaInicio" />
-                            
+
                             <h:outputLabel value="Data do Fim do Evento:*"/>
                             <p:calendar id="dataHoraFim" value="#{reservaMB.fimEvento}" pattern="dd/MM/yyyy" required="true" requiredMessage="Campo Obrigatório" />
                             <p:message for="dataHoraFim" />
-                            
+
                             <h:outputLabel value="Hora do Fim do Evento:*" />
                             <h:selectOneMenu id="horaFim" requiredMessage="Campo Obrigatório" value="#{reservaMB.horaFim}" required="true">
                                 <f:selectItem itemValue="" itemLabel="Selecione o Horário"/>
@@ -172,56 +172,56 @@
                                 <f:selectItem itemValue="21:25" itemLabel="21:25"/>
                                 <f:selectItem itemValue="22:15" itemLabel="22:15"/>
                             </h:selectOneMenu><p:message for="horaFim" />
-                            
+
                             <h:outputLabel value="Periodicidade:*" />
                             <p:inputText id="periodicidade" value="#{reservaMB.reserva.periodicidade}" required="true" requiredMessage="Campo Obrigatório"/>
                             <p:message for="periodicidade" />
-                            
+
                             <h:outputLabel value="Status:*" />
                             <h:selectOneMenu id="status" disabled="false" requiredMessage="Campo Obrigatório" value="#{reservaMB.reserva.status}" required="true">
                                 <f:selectItem itemValue="Reserva Pendente" itemLabel="Reserva Pendente"/>
                                 <f:selectItem itemValue="Reserva Autorizada" itemLabel="Reserva Autorizada"/>
                                 <f:selectItem itemValue="Reserva Não Autorizada" itemLabel="Reserva Não Autorizada"/>
                             </h:selectOneMenu><p:message for="status" />
-                            
+
                             <h:outputLabel value="Sala:*" />
                             <h:selectOneMenu id="sala" requiredMessage="Campo Obrigatório" value="#{reservaMB.sala.codigoSala}" required="true">
                                 <f:selectItem itemLabel="Selecione a Sala" itemValue="" />
                                 <f:selectItems var="s" value="#{reservaMB.listaSalas()}" itemValue="#{s.codigoSala}" itemLabel="#{s.nomeSala}"/>  
                             </h:selectOneMenu><p:message for="sala" />
-                            
+
                             <h:outputLabel value="Usuário:*" />
                             <h:selectOneMenu id="usuario" requiredMessage="Campo Obrigatório" value="#{reservaMB.usuario.matricula}" required="true">
                                 <f:selectItem itemLabel="Selecione o Usuário" itemValue="" />  
                                 <f:selectItems var="u" value="#{reservaMB.listaUsuarios()}" itemValue="#{u.matricula}" itemLabel="#{u.matricula}"/>  
                             </h:selectOneMenu><p:message for="usuario" />
-                            
+
                             <h:outputLabel value="Turma:" />
                             <h:selectOneMenu id="turma" value="#{reservaMB.turma.cod_turma}">
                                 <f:selectItem itemLabel="Selecione a Turma" itemValue="" />  
                                 <f:selectItems var="t" value="#{reservaMB.listaTurmas()}" itemValue="#{t.cod_turma}" itemLabel="#{t.numero_turma}"/>  
                             </h:selectOneMenu><p:message for="turma" />
-                            
+
                             <h:outputLabel value="Categoria de Evento:*" />
                             <h:selectOneMenu id="categoriaEvento" requiredMessage="Campo Obrigatório" value="#{reservaMB.categoriaDeEvento.codCatEvento}" required="true">
                                 <f:selectItem itemLabel="Selecione a Categoria de Evento" itemValue="" />  
                                 <f:selectItems var="c" value="#{reservaMB.listaCategoriaDeEventos()}" itemValue="#{c.codCatEvento}" itemLabel="#{c.descricao}"/>  
                             </h:selectOneMenu><p:message for="sala" />
-                            
+
                             <h:outputLabel value="Descrição:*" />
                             <p:inputText id="descricao" value="#{reservaMB.reserva.descricao}" required="true" requiredMessage="Campo Obrigatório"/>
                             <p:message for="descricao" />
-                        
+
                         </h:panelGrid>
                         <p:commandButton value="Cadastrar" action="#{reservaMB.inserirReserva()}" update=":tabela, formulario"/>
                         <p:commandButton value="Alterar" action="#{reservaMB.alterarReserva()}" update=":tabela, formulario"/>
                         <p:commandButton value="Excluir" action="#{reservaMB.excluirReserva()}" update=":tabela, formulario"/><br/><br/>
-                       <b><h:outputText value="#{reservaMB.mensagem}" style="font: bolder"/></b>
+                        <b><h:outputText value="#{reservaMB.mensagem}" style="font: bolder"/></b>
                     </p:panel>
                 </h:form>
-                
+
                 <hr></hr>
-                
+
                 <h:form id="formPesquisa">
                     <p:panel id="formPanelPesquisa" header="Pesquisar por Status, Código da Turma ou Descrição">
                         <h:panelGrid columns="3">
@@ -235,7 +235,11 @@
                     <p:panel id="formPanelPesquisa" header="Pesquisar Todas as Reservas">
                         <p:commandButton value="Pesquisar Todas" action="#{reservaMB.pesquisar()}" update=":formPesquisa, :tabela, :formulario"/>
                     </p:panel>
+                    
+                   
                 </h:form>
+                
+              
 
             </ui:define>
 

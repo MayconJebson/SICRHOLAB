@@ -177,4 +177,8 @@ public class UsuarioMB {
     public void setUsuarioPesquisado(String usuarioPesquisado) {
         this.usuarioPesquisado = usuarioPesquisado;
     }
+    
+    public String cadastrarUsuario(){
+        return "/admin/cadastroUsuario.xhtml";
+    }
 }

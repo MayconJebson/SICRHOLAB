@@ -15,9 +15,9 @@
             <ui:define name="titulo_pagina">Menu Usuários</ui:define>
 
             <ui:define name="form_manutencao">
-                
+
                 <h:form></h:form>
-                
+
                 <h:form id="tabela">
                     <p:dataTable rendered="true" id="dataTable" var="u" value="#{usuarioMB.usuarios}" paginator="true" rows="5"  
                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
@@ -68,10 +68,10 @@
                     </p:dataTable>
                 </h:form>
                 <hr></hr>
-                
+
                 <h:form id="formulario"> 
                     <p:panel id="panel" header="Cadastro de Usuário">    
-                        
+
                         <h:panelGrid columns="3">
 
                             <h:outputLabel for="nome" value="Nome: *" />  
@@ -82,16 +82,16 @@
                             <h:outputLabel for="matricula" value="Matrícula: *" />  
                             <p:inputMask mask="9999999999" id="matricula" value="#{usuarioMB.usuario.matricula}" maxlength="10" required="true" requiredMessage="Campo Obrigatório" label="Matricula"/>  
                             <p:message for="matricula" /> 
-                       
-                             <h:outputLabel for="pwd1" value="Senha: *" />  
-                             <p:password id="pwd1" value="#{usuarioMB.usuario.senha}"   requiredMessage="Campo Obrigatório" feedback="true" label="Senha" required="true"/>  
-                             <p:message for="pwd1"/>
-                             
-                             <h:outputLabel for="pwd2" value="Confirme a senha: *" />  
-                             <p:password id="pwd2" value="#{usuarioMB.confirmacao}" requiredMessage="Campo Obrigatório" label="Confirmação" required="true"/>  
-                             <p:message for="pwd2"/>
-                            
-                            
+
+                            <h:outputLabel for="pwd1" value="Senha: *" />  
+                            <p:password id="pwd1" value="#{usuarioMB.usuario.senha}"   requiredMessage="Campo Obrigatório" feedback="true" label="Senha" required="true"/>  
+                            <p:message for="pwd1"/>
+
+                            <h:outputLabel for="pwd2" value="Confirme a senha: *" />  
+                            <p:password id="pwd2" value="#{usuarioMB.confirmacao}" requiredMessage="Campo Obrigatório" label="Confirmação" required="true"/>  
+                            <p:message for="pwd2"/>
+
+
                             <h:outputLabel for="telefone" value="Telefone: " />  
                             <p:inputMask id="telefone" mask="(99)9999-9999" value="#{usuarioMB.usuario.telefone}" label="Telefone"/>  
                             <p:message for="telefone"/>
@@ -117,8 +117,8 @@
                 </h:form>
                 <br/>
 
-                 <!--Formulario de pesquisa--> 
-                
+                <!--Formulario de pesquisa--> 
+
                 <h:form id="formPesquisa">
                     <p:panel id="formPanelPesquisa" header="Pesquisar Usuário">
                         <h:panelGrid columns="3">
@@ -129,14 +129,14 @@
                     </p:panel>
                 </h:form>
                 <hr></hr>
-                
+
                 <h:form id="formPesquisaTodos">
                     <p:panel id="formPanelPesquisa" header="Pesquisar Todos os Usuários">
                         <p:commandButton value="Pesquisar Todos" action="#{usuarioMB.pesquisar()}" update=":formPesquisa, :tabela, :formulario"/>
                     </p:panel>
                 </h:form>
-        
-                
+
+
             </ui:define>
 
         </ui:composition>
