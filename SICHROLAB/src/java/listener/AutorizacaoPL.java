@@ -39,7 +39,7 @@ public class AutorizacaoPL implements PhaseListener {
         
         
                
-        if(viewId.startsWith("/index.xhtml") || viewId.startsWith("/login.xhtml")){
+        if(viewId.startsWith("/index.xhtml") || viewId.startsWith("/login.xhtml") || viewId.startsWith("/cadastroUsuario.xhtml")){
             return;
         }        
         

@@ -179,6 +179,6 @@ public class UsuarioMB {
     }
     
     public String cadastrarUsuario(){
-        return "/admin/cadastroUsuario.xhtml";
+        return "../cadastroUsuario.xhtml";
     }
 }
