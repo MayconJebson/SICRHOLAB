@@ -27,18 +27,26 @@ public class LoginMB {
     
     UsuarioJpaController daoUsuario = new UsuarioJpaController(factory);
 
-    private Usuario usuario;
+    private Usuario usuario = new Usuario();
     
     private String mensagem;
     
-    private boolean logado = false;
+    private boolean logado;
     
     private String pagina = null;
             
     private String ultimaPag = null;
 
     public LoginMB() {
-         usuario = new Usuario();
+        //usuario = new Usuario();
+        if (usuario == null)
+        {
+            logado = false;
+        }
+        else
+        {
+            logado = true;
+        }
     }
     
     public String login(){
