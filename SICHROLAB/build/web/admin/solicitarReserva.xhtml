@@ -76,8 +76,12 @@
                             </h:selectOneMenu><p:message for="horaFim" />
                             
                             <h:outputLabel value="Periodicidade:*" />
-                            <p:inputText id="periodicidade" value="#{reservaMB.reserva.periodicidade}" required="true" requiredMessage="Campo Obrigatório"/>
-                            <p:message for="periodicidade" />
+                            <h:selectOneMenu id="periodicidade" requiredMessage="Campo Obrigatório" value="#{reservaMB.reserva.periodicidade}" required="true">
+                                <f:selectItem itemValue="" itemLabel="Selecione a Periodicidade"/>
+                                <f:selectItem itemValue="Diário" itemLabel="Diário"/>
+                                <f:selectItem itemValue="Semanal" itemLabel="Semanal"/>
+                                <f:selectItem itemValue="Semestral" itemLabel="Semestral"/>
+                            </h:selectOneMenu><p:message for="periodicidade" />
                             
                             <h:outputLabel value="Status:*" />
                             <h:selectOneMenu id="status" disabled="true" requiredMessage="Campo Obrigatório" value="#{reservaMB.reserva.status}" required="true">
@@ -93,9 +97,8 @@
                             </h:selectOneMenu><p:message for="sala" />
                             
                             <h:outputLabel value="Usuário:*" />
-                            <h:selectOneMenu id="usuario" requiredMessage="Campo Obrigatório" value="#{reservaMB.usuario.matricula}" required="true">
-                                <f:selectItem itemLabel="Selecione o Usuário" itemValue="" />  
-                                <f:selectItems var="u" value="#{reservaMB.listaUsuarios()}" itemValue="#{u.matricula}" itemLabel="#{u.matricula}"/>  
+                            <h:selectOneMenu id="usuario" disabled="true" requiredMessage="Campo Obrigatório" value="#{reservaMB.usuario.matricula}" required="true">
+                                <f:selectItem itemValue="#{loginMB.usuario.matricula}" itemLabel="#{loginMB.usuario.matricula}"/>  
                             </h:selectOneMenu><p:message for="usuario" />
                             
                             <h:outputLabel value="Turma:" />
@@ -111,7 +114,7 @@
                             </h:selectOneMenu><p:message for="sala" />
                             
                             <h:outputLabel value="Descrição:*" />
-                            <p:inputText id="descricao" value="#{reservaMB.reserva.descricao}" required="true" requiredMessage="Campo Obrigatório"/>
+                            <p:inputTextarea id="descricao" value="#{reservaMB.reserva.descricao}" required="true" requiredMessage="Campo Obrigatório"/>
                             <p:message for="descricao" />
                         
                         </h:panelGrid>

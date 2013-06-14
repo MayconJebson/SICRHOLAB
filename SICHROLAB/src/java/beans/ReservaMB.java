@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -71,7 +72,7 @@ public class ReservaMB {
             reserva.setDataHoraFimEvento(fimEvento);
             reserva.setTurma(turma);
             reserva.setCategoriaEvento(categoriaDeEvento);
-            reserva.setUsuario(usuario);
+            reserva.setUsuario(usuarioDAO.findUsuario(usuario.getMatricula()));
             reserva.setSala(sala);
             reservaDAO.create(reserva);
             reserva = new Reserva();

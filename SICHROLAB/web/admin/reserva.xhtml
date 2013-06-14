@@ -174,8 +174,12 @@
                             </h:selectOneMenu><p:message for="horaFim" />
 
                             <h:outputLabel value="Periodicidade:*" />
-                            <p:inputText id="periodicidade" value="#{reservaMB.reserva.periodicidade}" required="true" requiredMessage="Campo Obrigatório"/>
-                            <p:message for="periodicidade" />
+                            <h:selectOneMenu id="periodicidade" requiredMessage="Campo Obrigatório" value="#{reservaMB.reserva.periodicidade}" required="true">
+                                <f:selectItem itemValue="" itemLabel="Selecione a Periodicidade"/>
+                                <f:selectItem itemValue="Diário" itemLabel="Diário"/>
+                                <f:selectItem itemValue="Semanal" itemLabel="Semanal"/>
+                                <f:selectItem itemValue="Semestral" itemLabel="Semestral"/>
+                            </h:selectOneMenu><p:message for="periodicidade" />
 
                             <h:outputLabel value="Status:*" />
                             <h:selectOneMenu id="status" disabled="false" requiredMessage="Campo Obrigatório" value="#{reservaMB.reserva.status}" required="true">
@@ -209,7 +213,7 @@
                             </h:selectOneMenu><p:message for="sala" />
 
                             <h:outputLabel value="Descrição:*" />
-                            <p:inputText id="descricao" value="#{reservaMB.reserva.descricao}" required="true" requiredMessage="Campo Obrigatório"/>
+                            <p:inputTextarea id="descricao" value="#{reservaMB.reserva.descricao}" required="true" requiredMessage="Campo Obrigatório"/>
                             <p:message for="descricao" />
 
                         </h:panelGrid>
@@ -230,17 +234,15 @@
                         <p:commandButton value="Pesquisar" action="#{reservaMB.pesquisarPorReserva()}" update="formPesquisa, :tabela, :formulario"/>
                     </p:panel>
                 </h:form>
+                
                 <hr></hr>
+                
                 <h:form id="formPesquisaTodos">
                     <p:panel id="formPanelPesquisa" header="Pesquisar Todas as Reservas">
                         <p:commandButton value="Pesquisar Todas" action="#{reservaMB.pesquisar()}" update=":formPesquisa, :tabela, :formulario"/>
-                    </p:panel>
-                    
-                   
+                    </p:panel>   
                 </h:form>
                 
-              
-
             </ui:define>
 
         </ui:composition>
