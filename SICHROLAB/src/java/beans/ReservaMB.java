@@ -72,7 +72,7 @@ public class ReservaMB {
             reserva.setDataHoraFimEvento(fimEvento);
             reserva.setTurma(turma);
             reserva.setCategoriaEvento(categoriaDeEvento);
-            reserva.setUsuario(usuarioDAO.findUsuario(usuario.getMatricula()));
+            reserva.setUsuario(usuario);
             reserva.setSala(sala);
             reservaDAO.create(reserva);
             reserva = new Reserva();
