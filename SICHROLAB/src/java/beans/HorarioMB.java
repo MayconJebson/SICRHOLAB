@@ -169,7 +169,7 @@ public class HorarioMB {
     
     public String listarHorarios(){
         
-        return "/admin/horarios.xhtml";
+        return "/usuario/horarios.xhtml";
     }
 
     public List<Reserva> getResult() {
