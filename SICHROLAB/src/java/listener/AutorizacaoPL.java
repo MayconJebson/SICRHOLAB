@@ -61,7 +61,7 @@ public class AutorizacaoPL implements PhaseListener {
             
             else if (viewId.startsWith("/usuario/")) {
                 return;
-            }            
+            }   
         }  
         
             
