@@ -2,23 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package beans;
 
-import dao.CategoriaUsuarioJpaController;
 import dao.UsuarioJpaController;
-import dao.exceptions.NonexistentEntityException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.servlet.http.HttpSession;
-import modelo.CategoriaUsuario;
 import modelo.Usuario;
 
 

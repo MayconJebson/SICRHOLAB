@@ -2,6 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package beans;
 
 import dao.CategoriaUsuarioJpaController;
@@ -17,7 +18,6 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import modelo.CategoriaUsuario;
-import modelo.Usuario;
 
 /**
  *
